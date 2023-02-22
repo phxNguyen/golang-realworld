@@ -2,8 +2,9 @@ package ginarticle
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-cookie-blog/modules/article/articleservice"
-	"golang-cookie-blog/modules/article/articlestore"
+	"golang-realworld/common"
+	"golang-realworld/modules/article/articleservice"
+	"golang-realworld/modules/article/articlestore"
 	"gorm.io/gorm"
 	"net/http"
 	"strconv"
@@ -14,9 +15,7 @@ func GetArticleHandler(db *gorm.DB) gin.HandlerFunc {
 
 		id, err := strconv.Atoi(c.Param("id"))
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": err.Error(),
-			})
+			panic(common.ErrInvalidRequest(err))
 		}
 		store := articlestore.NewSQLStore(db)
 
@@ -24,9 +23,7 @@ func GetArticleHandler(db *gorm.DB) gin.HandlerFunc {
 
 		data, err := service.FindArticleById(c.Request.Context(), id)
 		if err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"error": err.Error(),
-			})
+			panic(err)
 		}
 
 		c.JSON(http.StatusOK, data)

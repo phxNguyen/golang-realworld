@@ -2,8 +2,11 @@ package articleservice
 
 import (
 	"context"
-	"golang-cookie-blog/modules/article/articlemodel"
+	"golang-realworld/common"
+	"golang-realworld/modules/article/articlemodel"
 )
+
+const EntityName = "Article"
 
 type FindArticleStore interface {
 	FindArticleByCondition(ctx context.Context, cond map[string]interface{}, moreKeys ...string) (*articlemodel.Article, error)
@@ -21,7 +24,13 @@ func (service *getArticleService) FindArticleById(ctx context.Context, id int) (
 
 	data, err := service.store.FindArticleByCondition(ctx, map[string]interface{}{"id": id})
 	if err != nil {
-		return nil, err
+		if err != common.RecordNotFound {
+			return nil, common.ErrCannotGetEntity(articlemodel.EntityName, err)
+		}
+		return nil, common.ErrCannotGetEntity(articlemodel.EntityName, err)
 	}
-	return data, nil
+	if data.Status == 0 {
+		return nil, common.ErrCannotGetEntity(articlemodel.EntityName, nil)
+	}
+	return data, err
 }

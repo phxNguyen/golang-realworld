@@ -1,4 +1,4 @@
-module golang-cookie-blog
+module golang-realworld
 
 go 1.19
 

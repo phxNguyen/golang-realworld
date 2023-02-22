@@ -2,8 +2,8 @@ package articleservice
 
 import (
 	"context"
-	"golang-cookie-blog/common"
-	"golang-cookie-blog/modules/article/articlemodel"
+	"golang-realworld/common"
+	"golang-realworld/modules/article/articlemodel"
 )
 
 type ListArticleStore interface {

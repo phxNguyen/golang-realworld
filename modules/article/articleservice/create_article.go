@@ -2,7 +2,7 @@ package articleservice
 
 import (
 	"context"
-	"golang-cookie-blog/modules/article/articlemodel"
+	"golang-realworld/modules/article/articlemodel"
 )
 
 // CreateArticleStore can du lieu cua storage thi goi qua interface

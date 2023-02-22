@@ -2,10 +2,10 @@ package ginarticle
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-cookie-blog/component"
-	"golang-cookie-blog/modules/article/articlemodel"
-	"golang-cookie-blog/modules/article/articleservice"
-	"golang-cookie-blog/modules/article/articlestore"
+	"golang-realworld/component"
+	"golang-realworld/modules/article/articlemodel"
+	"golang-realworld/modules/article/articleservice"
+	"golang-realworld/modules/article/articlestore"
 	"net/http"
 )
 

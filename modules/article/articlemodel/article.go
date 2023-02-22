@@ -2,9 +2,11 @@ package articlemodel
 
 import (
 	"errors"
-	"golang-cookie-blog/common"
+	"golang-realworld/common"
 	"strings"
 )
+
+const EntityName = "Article"
 
 type Article struct {
 	Id               int    `json:"id" gorm:"column:id;"`

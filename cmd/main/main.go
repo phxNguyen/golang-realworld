@@ -3,8 +3,9 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"golang-cookie-blog/component"
-	"golang-cookie-blog/modules/article/articletransport/ginarticle"
+	"golang-realworld/component"
+	"golang-realworld/middleware"
+	"golang-realworld/modules/article/articletransport/ginarticle"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"log"
@@ -43,6 +44,8 @@ func main() {
 
 func runService(db *gorm.DB) error {
 	router := gin.Default()
+	appCtx := component.NewAppContext(db)
+	router.Use(middleware.Recover(appCtx))
 
 	router.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
@@ -50,7 +53,6 @@ func runService(db *gorm.DB) error {
 		})
 	})
 
-	appCtx := component.NewAppContext(db)
 	articles := router.Group("/articles")
 	{
 		articles.POST("/", ginarticle.CreateRestaurantHandler(appCtx))

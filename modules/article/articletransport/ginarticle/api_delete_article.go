@@ -2,9 +2,9 @@ package ginarticle
 
 import (
 	"github.com/gin-gonic/gin"
-	"golang-cookie-blog/common"
-	"golang-cookie-blog/modules/article/articleservice"
-	"golang-cookie-blog/modules/article/articlestore"
+	"golang-realworld/common"
+	"golang-realworld/modules/article/articleservice"
+	"golang-realworld/modules/article/articlestore"
 	"gorm.io/gorm"
 	"net/http"
 	"strconv"

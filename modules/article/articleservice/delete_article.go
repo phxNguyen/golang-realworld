@@ -3,7 +3,7 @@ package articleservice
 import (
 	"context"
 	"errors"
-	"golang-cookie-blog/modules/article/articlemodel"
+	"golang-realworld/modules/article/articlemodel"
 )
 
 type DeleteArticleStore interface {
