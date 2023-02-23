@@ -6,7 +6,7 @@ import (
 	"golang-realworld/modules/article/articlemodel"
 )
 
-func (s *sqlStore) ListArticle(ctx context.Context, filter *articlemodel.Filter, paging *common.Paging, moreKeys ...string) ([]articlemodel.Article, error) {
+func (s *articleStore) ListArticle(ctx context.Context, filter *articlemodel.Filter, paging *common.Paging, moreKeys ...string) ([]articlemodel.Article, error) {
 
 	var data []articlemodel.Article
 	db := s.db

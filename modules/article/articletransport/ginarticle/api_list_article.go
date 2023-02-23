@@ -30,7 +30,7 @@ func ListArticleHandler(db *gorm.DB) gin.HandlerFunc {
 
 		_ = paging.Validate()
 
-		store := articlestore.NewSQLStore(db)
+		store := articlestore.NewArticleStore(db)
 		service := articleservice.NewListArticleService(store)
 
 		data, err := service.ListArticleService(c.Request.Context(), &filter, &paging)

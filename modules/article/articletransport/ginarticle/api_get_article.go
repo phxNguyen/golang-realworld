@@ -17,7 +17,7 @@ func GetArticleHandler(db *gorm.DB) gin.HandlerFunc {
 		if err != nil {
 			panic(common.ErrInvalidRequest(err))
 		}
-		store := articlestore.NewSQLStore(db)
+		store := articlestore.NewArticleStore(db)
 
 		service := articleservice.NewGetArticle(store)
 

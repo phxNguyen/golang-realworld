@@ -6,6 +6,7 @@ import (
 	"golang-realworld/component"
 	"golang-realworld/middleware"
 	"golang-realworld/modules/article/articletransport/ginarticle"
+	"golang-realworld/modules/upload/uploadtransport/ginupload"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"log"
@@ -52,6 +53,8 @@ func runService(db *gorm.DB) error {
 			"message": "pong",
 		})
 	})
+
+	router.POST("/upload", ginupload.Upload(appCtx))
 
 	articles := router.Group("/articles")
 	{

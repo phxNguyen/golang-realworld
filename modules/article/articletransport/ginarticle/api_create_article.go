@@ -21,7 +21,7 @@ func CreateRestaurantHandler(appCtx component.AppContext) gin.HandlerFunc {
 			return
 		}
 
-		store := articlestore.NewSQLStore(appCtx.GetMainDbConnection())
+		store := articlestore.NewArticleStore(appCtx.GetMainDbConnection())
 		service := articleservice.NewCreateArticleService(store)
 
 		if err := service.CreateArticle(c.Request.Context(), &data); err != nil {

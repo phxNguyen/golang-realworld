@@ -6,7 +6,7 @@ import (
 	"golang-realworld/modules/article/articlemodel"
 )
 
-func (s *sqlStore) DeleteArticle(ctx context.Context, cond map[string]interface{}) error {
+func (s *articleStore) DeleteArticle(ctx context.Context, cond map[string]interface{}) error {
 
 	db := s.db
 

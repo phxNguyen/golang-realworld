@@ -20,7 +20,7 @@ func DeleteArticleHandler(db *gorm.DB) gin.HandlerFunc {
 			return
 		}
 
-		store := articlestore.NewSQLStore(db)
+		store := articlestore.NewArticleStore(db)
 		service := articleservice.NewDeleteArticleService(store)
 
 		if err := service.DeleteArticleService(c.Request.Context(), id); err != nil {

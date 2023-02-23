@@ -6,7 +6,7 @@ import (
 	"golang-realworld/modules/article/articlemodel"
 )
 
-func (s *sqlStore) CreateArticle(ctx context.Context, data *articlemodel.ArticleCreate) error {
+func (s *articleStore) CreateArticle(ctx context.Context, data *articlemodel.ArticleCreate) error {
 
 	db := s.db
 

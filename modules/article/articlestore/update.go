@@ -6,7 +6,7 @@ import (
 	"golang-realworld/modules/article/articlemodel"
 )
 
-func (s *sqlStore) UpdateArticle(ctx context.Context, data *articlemodel.ArticleUpdate, cond map[string]interface{}) error {
+func (s *articleStore) UpdateArticle(ctx context.Context, data *articlemodel.ArticleUpdate, cond map[string]interface{}) error {
 
 	db := s.db
 

@@ -25,7 +25,7 @@ func UpdateArticleHandler(db *gorm.DB) gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		store := articlestore.NewSQLStore(db)
+		store := articlestore.NewArticleStore(db)
 		service := articleservice.NewUpdateArticleService(store)
 
 		if err := service.UpdateArticleService(c.Request.Context(), &data, id); err != nil {

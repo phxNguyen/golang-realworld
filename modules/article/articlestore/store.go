@@ -2,10 +2,10 @@ package articlestore
 
 import "gorm.io/gorm"
 
-type sqlStore struct {
+type articleStore struct {
 	db *gorm.DB
 }
 
-func NewSQLStore(db *gorm.DB) *sqlStore {
-	return &sqlStore{db: db}
+func NewArticleStore(db *gorm.DB) *articleStore {
+	return &articleStore{db: db}
 }
