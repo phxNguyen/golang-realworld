@@ -9,12 +9,13 @@ import (
 const EntityName = "Article"
 
 type Article struct {
-	common.BaseModel `json:",inline"`
 	Id               int    `json:"id" gorm:"column:id;"`
 	AuthorId         int    `json:"author_id" gorm:"column:id;"`
 	Title            string `json:"title" gorm:"column:title;"`
 	Content          string `json:"content" gorm:"column:content;"`
+	Cover            *common.Image
 	Logo             *common.Image
+	common.BaseModel `json:",inline"`
 }
 
 func (Article) TableName() string {
@@ -24,6 +25,7 @@ func (Article) TableName() string {
 type ArticleCreate struct {
 	Title   string        `json:"title" gorm:"column:title;"`
 	Content string        `json:"content" gorm:"column:content;"`
+	Cover   *common.Image `json:"cover" gorm:"column:cover;"`
 	Logo    *common.Image `json:"logo" gorm:"column:logo;"`
 }
 
@@ -32,9 +34,10 @@ func (ArticleCreate) TableName() string {
 }
 
 type ArticleUpdate struct {
-	Title   *string `json:"title" gorm:"column:title;"`
-	Content *string `json:"content" gorm:"column:content;"`
-	Logo    *common.Image
+	Title   string        `json:"title" gorm:"column:title;"`
+	Content string        `json:"content" gorm:"column:content;"`
+	Cover   *common.Image `json:"cover" gorm:"column:cover;"`
+	Logo    *common.Image `json:"logo" gorm:"column:logo;"`
 }
 
 func (ArticleUpdate) TableName() string {
