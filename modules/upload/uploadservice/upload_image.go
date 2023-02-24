@@ -19,17 +19,18 @@ type CreateImageStore interface {
 	CreateImage(context context.Context, data *common.Image) error
 }
 
-type createImageService struct {
+type uploadImageService struct {
 	store    CreateImageStore
 	provider uploadprovider.UploadProvider
 }
 
-func NewUploadImageService(store CreateImageStore) *createImageService {
-	return &createImageService{
-		store: store,
+func NewUploadImageService(provider uploadprovider.UploadProvider, store CreateImageStore) *uploadImageService {
+	return &uploadImageService{
+		provider: provider,
+		store:    store,
 	}
 }
-func (service createImageService) UpLoadImage(ctx context.Context, data []byte, folder, fileName string) (*common.Image, error) {
+func (service uploadImageService) UpLoadImage(ctx context.Context, data []byte, folder, fileName string) (*common.Image, error) {
 
 	fileBytes := bytes.NewBuffer(data)
 
@@ -43,15 +44,20 @@ func (service createImageService) UpLoadImage(ctx context.Context, data []byte, 
 		folder = "img"
 	}
 
-	fileExt := filepath.Ext(fileName)                                // "img.jpg" => ".jpg"
-	fileName = fmt.Sprintf("%d%s", time.Now().Nanosecond(), fileExt) // 9129324893248.jpg
+	fileExt := filepath.Ext(fileName)                                // read extension file e.g: "img.jpg" => ".jpg"
+	fileName = fmt.Sprintf("%d%s", time.Now().Nanosecond(), fileExt) // uniquely name the file by getting the current time in nanosecond
 
+	// s3 provider
 	img, err := service.provider.SaveFileUploaded(ctx, data, fmt.Sprintf("%s/%s", folder, fileName))
 
 	img.Width = w
 	img.Height = h
-
 	img.Extension = fileExt
+	
+	//if err := biz.imgStore.CreateImage(ctx, img); err != nil {
+	//	// delete img on S3
+	//	return nil, uploadmodel.ErrCannotSaveFile(err)
+	//}
 	return img, nil
 }
 func getImageDimension(reader io.Reader) (int, int, error) {
